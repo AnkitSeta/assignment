@@ -1,0 +1,189 @@
+<div class="dialog-container">
+  <h2 mat-dialog-title>
+    Add Student
+  </h2>
+  <mat-dialog-content class="scrollBar">
+    <form
+      fxLayout="row wrap"
+      fxLayoutAlign="space-between start"
+      [formGroup]="studentForm"
+    >
+      <div
+        fxFlexFill
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        fxLayoutGap="10px"
+      >
+        <mat-form-field
+          fxFlex="50%"
+          fxFlexFill
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>First Name</mat-label>
+          <input
+            formControlName="name"
+            required
+            maxLength="20"
+            matInput
+            placeholder="First Name"
+          />
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['name'].touched &&
+              studentForm.controls['name'].hasError('required')
+            "
+          >
+            This field is required.
+          </mat-error>
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['name'].touched &&
+              studentForm.controls['name'].hasError('pattern')
+            "
+          >
+            Only Character are allowed.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="50%"
+          fxFlexFill
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Last Name</mat-label>
+          <input
+            formControlName="lastName"
+            required
+            maxLength="20"
+            matInput
+            placeholder="Last Name"
+          />
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['lastName'].touched &&
+              studentForm.controls['lastName'].hasError('required')
+            "
+          >
+            This field is required.
+          </mat-error>
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['lastName'].touched &&
+              studentForm.controls['lastName'].hasError('pattern')
+            "
+          >
+            Only Character are allowed.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div
+        fxFlexFill
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        fxLayoutGap="10px"
+      >
+        <mat-form-field
+          fxFlex="50%"
+          fxFlexFill
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Class</mat-label>
+          <input
+            formControlName="studentClass"
+            required
+            matInput
+            placeholder="Class"
+          />
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['studentClass'].touched &&
+              studentForm.controls['studentClass'].hasError('required')
+            "
+          >
+            This field is required.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="50%"
+          fxFlexFill
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Year Of Passing</mat-label>
+          <input
+            formControlName="yearOfPassing"
+            required
+            appOnlyNumber
+            maxLength="4"
+            matInput
+            placeholder="Year Of Passing"
+          />
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['yearOfPassing'].touched &&
+              studentForm.controls['yearOfPassing'].hasError('required')
+            "
+          >
+            This field is required.
+          </mat-error>
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['yearOfPassing'].touched &&
+              studentForm.controls['yearOfPassing'].hasError('max')
+            "
+          >
+            Year cannot be more than 2017
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div
+        fxFlexFill
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        fxLayoutGap="10px"
+      >
+        <mat-form-field
+          fxFlex="50%"
+          fxFlexFill
+          appearance="outline"
+          color="accent"
+        >
+          <mat-label>Percentage</mat-label>
+          <input
+            formControlName="percentage"
+            required
+            appOnlyNumber
+            maxLength="2"
+            matInput
+            placeholder="Percentage"
+          />
+          <mat-error
+            align="end"
+            *ngIf="
+              studentForm.controls['percentage'].touched &&
+              studentForm.controls['percentage'].hasError('required')
+            "
+          >
+            This field is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <div class="spacer"></div>
+  <mat-dialog-actions align="center">
+    <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+    <button [disabled] = "studentForm.invalid" (click)="onSubmit()" mat-flat-button color="primary">
+      Create
+    </button>
+  </mat-dialog-actions>
+</div>

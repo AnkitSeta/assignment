@@ -1,0 +1,80 @@
+<div class="container ">
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <div fxFlex="60%" fxFlexFill class="mat-elevation-z8 content">
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <h2 class="mat-h1">Students Results</h2>
+
+        <button mat-stroked-button color="primary" (click)="onAddStudent()">Add Student</button>
+      </div>
+      <div *ngIf="studentsResults.length !== 0">
+        <table
+          mat-table
+          [dataSource]="studentsResults"
+        >
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Student Name</th>
+            <td
+              [ngClass]="{
+                fail: element.status === 'fail',
+                topper: element.status === 'topper'
+              }"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.name | titlecase }}
+            </td>
+          </ng-container>
+
+          <!-- Roll Number Column -->
+          <ng-container matColumnDef="rollNumber">
+            <th mat-header-cell *matHeaderCellDef>Roll Number</th>
+            <td
+              [ngClass]="{
+                fail: element.status === 'fail',
+                topper: element.status === 'topper'
+              }"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.rollNumber }}
+            </td>
+          </ng-container>
+
+          <!-- Total Marks Column -->
+          <ng-container matColumnDef="totalMarks">
+            <th mat-header-cell *matHeaderCellDef>Total Marks</th>
+            <td
+              [ngClass]="{
+                fail: element.status === 'fail',
+                topper: element.status === 'topper'
+              }"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.totalMarks }}
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td
+              [ngClass]="{
+                fail: element.status === 'fail',
+                topper: element.status === 'topper'
+              }"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.status | titlecase }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
