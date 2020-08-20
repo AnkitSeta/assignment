@@ -3,6 +3,7 @@ import { StudentsResultService } from './students-result.service';
 import { Marks, StudentResult } from '../core/models/student-result.model';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentAdminDialogComponent } from '../student-admin-dialog/student-admin-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-students-result',
@@ -14,7 +15,11 @@ export class StudentsResultComponent implements OnInit {
   topprMarks: number = 0;
   displayedColumns: string[] = ['name', 'rollNumber', 'totalMarks', 'status'];
 
-  constructor(private studentsResultService: StudentsResultService, public dialog: MatDialog,) {}
+  constructor(
+    private studentsResultService: StudentsResultService,
+    public dialog: MatDialog,
+    private toasterService: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getStudentResult();
@@ -54,15 +59,16 @@ export class StudentsResultComponent implements OnInit {
     return +marks.English + +marks.Maths + +marks.Science;
   }
 
-  onAddStudent(){
+  onAddStudent() {
     const dialogRef = this.dialog.open(StudentAdminDialogComponent, {
       width: '600px',
-      height: '600px'
+      height: '600px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         //Call for adding new student should be made form here
+        this.toasterService.success('Student registered successfully.');
         console.log(result);
       }
     });
